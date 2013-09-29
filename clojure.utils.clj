@@ -29,3 +29,13 @@
     (< n 2) false
     (< n 4) true
     :else (not= 0 (reduce *' (map #(mod n %) (range 2 (+ 1 (Math/sqrt n))))))))
+
+
+
+; string related functions
+
+(use '[clojure.string :only (join split capitalize lower-case)])
+
+(defn proper-case [s]
+  "given a string, returns a string with each word captialized and all other letters lower-case"
+  (join " " (map #(capitalize  %) (split (lower-case s) #"\s"))))
