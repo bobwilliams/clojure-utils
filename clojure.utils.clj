@@ -36,6 +36,6 @@
 
 (use '[clojure.string :only (join split capitalize lower-case)])
 
-(defn proper-case [s]
-  "given a string, returns a string with each word captialized and all other letters lower-case"
+(defn title-case [s]
+  "Given a sentence, returns a string with each word captialized and all other letters lower-case."
   (join " " (map #(capitalize  %) (split (lower-case s) #"\s"))))
