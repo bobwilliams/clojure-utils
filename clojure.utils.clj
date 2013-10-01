@@ -19,6 +19,14 @@
 (defn square-of-sums [n]
   (square (reduce + (range 1 (+ n 1)))))
 
+(defn primes [end]
+  "Uses a sieve to generate primes; not the set is not sorted"
+  (let [sieve (transient (set (cons 2 (range 3 end 2))))]
+    (loop [s sieve
+           f 3]
+      (cond (> (square f) end) (persistent! s)
+            :else (recur (reduce disj! s (range (square f) end f)) (inc f))))))
+
 (defn factor? [n d] 
   (if (zero? d)
     false
