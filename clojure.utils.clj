@@ -27,6 +27,12 @@
       (cond (> (square f) end) (persistent! s)
             :else (recur (reduce disj! s (range (square f) end f)) (inc f))))))
 
+(defn triangle [end]
+  (reduce + (take end (iterate inc 1))))
+
+(defn factors [num]
+  (filter #(factor? num %) (range 1 (+ 1 num))))
+
 (defn factor? [n d] 
   (if (zero? d)
     false
