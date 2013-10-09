@@ -27,6 +27,14 @@
       (cond (> (square f) end) (persistent! s)
             :else (recur (reduce disj! s (range (square f) end f)) (inc f))))))
 
+(defn collatz [n]
+  (cons n
+        (lazy-seq
+         (if (> n 1)
+           (if (even? n)
+                (collatz (/ n 2))
+                (collatz (+ (* 3 n) 1)))))))
+
 (defn triangle [end]
   (reduce + (take end (iterate inc 1))))
 
