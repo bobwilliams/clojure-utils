@@ -59,8 +59,8 @@
 (defn apply-fn-to-digits [x n]
   (apply x (map #(- (int %) 48) (seq (str n)))))
 
-(defn powers-of-2 []
-  (iterate (partial *' 2) 1))
+(defn powers-of-n [n]
+  (iterate (partial *' n) 1))
 
 ; string related functions
 
