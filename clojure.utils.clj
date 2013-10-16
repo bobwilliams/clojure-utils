@@ -56,6 +56,12 @@
   (true? (and (= (< a b) (< b c))
      (= (+ (square a) (square b)) (square c)))))
 
+(defn apply-fn-to-digits [x n]
+  (apply x (map #(- (int %) 48) (seq (str n)))))
+
+(defn powers-of-2 []
+  (iterate (partial *' 2) 1))
+
 ; string related functions
 
 (use '[clojure.string :only (join split capitalize lower-case)])
