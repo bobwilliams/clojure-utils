@@ -69,3 +69,7 @@
 (defn title-case [s]
   "Given a string, returns a string with each word (separated by a space) captialized and all other letters lower-case."
   (join " " (map #(capitalize  %) (split (lower-case s) #"\s"))))
+
+(defn in? 
+  [seq elm]  
+  (some #(= elm %) seq))
