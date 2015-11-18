@@ -1,6 +1,8 @@
 ; math related functions
 
-(def fibo (map first (iterate (fn [[a b]] [b (+ a b)]) [0 1])))
+(defn factorial [n] (reduce *' (range 1 (inc n))))
+
+(def fibo (map first (iterate (fn [[a b]] [b (+' a b)]) [0 1])))
 
 (defn gcd [a b] 
   (if (zero? b) 
@@ -61,6 +63,13 @@
 
 (defn powers-of-n [n]
   (iterate (partial *' n) 1))
+
+(defn perfect? [n]
+  (= n (reduce + (proper-divisors n))))
+
+(defn abundant? [n]
+  (let [sum (reduce + (proper-divisors n))]
+    (< n sum)))
 
 ; string related functions
 
