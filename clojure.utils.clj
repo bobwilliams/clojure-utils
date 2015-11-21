@@ -1,5 +1,8 @@
 ; math related functions
 
+(defn exp [x n]
+  (reduce *' (repeat n x)))
+
 (defn factorial [n] (reduce *' (range 1 (inc n))))
 
 (def fibo (map first (iterate (fn [[a b]] [b (+' a b)]) [0 1])))
