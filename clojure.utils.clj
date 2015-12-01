@@ -32,6 +32,24 @@
       (cond (> (square f) end) (persistent! s)
             :else (recur (reduce disj! s (range (square f) end f)) (inc f))))))
 
+(defn lazy-primes []
+  (letfn [(enqueue [sieve n step]
+            (let [m (+ n step)]
+              (if (sieve m)
+                (recur sieve m step)
+                (assoc sieve m step))))
+          (next-sieve [sieve n]            
+            (if-let [step (sieve n)]
+              (-> sieve
+                  (dissoc n)    
+                  (enqueue n step))
+              (enqueue sieve n (+ n n))))
+          (next-primes [sieve n]
+            (if (sieve n) 
+              (recur (next-sieve sieve n) (+ n 2))
+              (cons n (lazy-seq (next-primes (next-sieve sieve n) (+ n 2))))))]
+    (cons 2 (lazy-seq (next-primes {} 3)))))
+
 (defn abs-val [n]
   (if (> 0 n) (* -1 n) n))
 
