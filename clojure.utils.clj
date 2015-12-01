@@ -32,6 +32,9 @@
       (cond (> (square f) end) (persistent! s)
             :else (recur (reduce disj! s (range (square f) end f)) (inc f))))))
 
+(defn abs-val [n]
+  (if (> 0 n) (* -1 n) n))
+
 (defn collatz [n]
   (cons n
         (lazy-seq
@@ -67,12 +70,18 @@
 (defn powers-of-n [n]
   (iterate (partial *' n) 1))
 
+(defn proper-divisors [n]
+  (filter #(zero? (mod n %)) (range 1 (+ 1 (/ n 2)))))
+
 (defn perfect? [n]
   (= n (reduce + (proper-divisors n))))
 
 (defn abundant? [n]
   (let [sum (reduce + (proper-divisors n))]
     (< n sum)))
+
+(defn to-digits [i]
+  (map {\0 0 \1 1 \2 2 \3 3 \4 4 \5 5 \6 6 \7 7 \8 8 \9 9} (str i))) 
 
 ; string related functions
 
