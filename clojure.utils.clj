@@ -112,3 +112,13 @@
 (defn in? 
   [seq elm]  
   (some #(= elm %) seq))
+
+; hashing functions
+
+(defn md5-hash [message]
+  (apply str
+  (map (partial format "%02x")
+    (.digest (doto (java.security.MessageDigest/getInstance "MD5")
+                   .reset
+                   (.update (.getBytes message)))))))
+                   
