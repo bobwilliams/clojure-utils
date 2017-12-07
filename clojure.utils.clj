@@ -99,7 +99,7 @@
     (< n sum)))
 
 (defn to-digits [i]
-  (map {\0 0 \1 1 \2 2 \3 3 \4 4 \5 5 \6 6 \7 7 \8 8 \9 9} (str i))) 
+  (map {\0 0 \1 1 \2 2 \3 3 \4 4 \5 5 \6 6 \7 7 \8 8 \9 9} (str i)))
 
 ; string related functions
 
@@ -121,4 +121,12 @@
     (.digest (doto (java.security.MessageDigest/getInstance "MD5")
                    .reset
                    (.update (.getBytes message)))))))
+
+; execute a function 
+(defn exec-fn [this & that]
+  (cond 
+   (string? this) (apply (resolve (symbol this)) that)
+   (fn? this)     (apply this that)
+   :else          (conj that this)))
+
                    
